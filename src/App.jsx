@@ -23,13 +23,13 @@ class App extends Component {
 
     this.WebSocket.onmessage = function(event) {
       console.log('received', event.data);
-
+ 
       const newMessage = {
         id: event.data.id,
         username: event.data.username,
         content: event.data.content
       };
-
+// comments
       const messages = this.state.messages.concat(newMessage);
       console.log(messages);
       // Update the state of the app component.
