@@ -7,10 +7,9 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      currentUser: { name: 'shawn' },
+      connected: false,
+      currentUser: { name: '' },
       messages: [
-        { id: 1, username: 'shawn', content: 'This is my message' },
-        { id: 2, username: 'harry', content: 'harry is hairy' }
       ]
     };
 
@@ -19,22 +18,20 @@ class App extends Component {
 
   componentDidMount() {
     this.WebSocket = new WebSocket('ws://localhost:3001/');
-    console.log('ComponentDidMount', this.WebSocket);
-
-    this.WebSocket.onmessage = function(event) {
+    this.setState({ connected: true });
+    this.WebSocket.onmessage = event => {
       console.log('received', event.data);
- 
-      const newMessage = {
-        id: event.data.id,
-        username: event.data.username,
-        content: event.data.content
-      };
-// comments
-      const messages = this.state.messages.concat(newMessage);
-      console.log(messages);
+      const newMessage = JSON.parse(event.data);
       // Update the state of the app component.
       // Calling setState will trigger a call to render() in App and all child components.
-      this.setState({ messages: messages });
+      this.setState({
+        messages: this.state.messages.concat([
+          {
+            username: newMessage.username,
+            content: newMessage.content
+          }
+        ])
+      });
     };
   }
 
@@ -42,7 +39,7 @@ class App extends Component {
   onNewMessage(username, content) {
     // Send the msg object as a JSON-formatted string.
     const newMessage = {
-      id: 1,
+      type : 'postMessage',
       username: username,
       content: content
     };
