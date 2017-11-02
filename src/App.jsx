@@ -41,6 +41,7 @@ class App extends Component {
             messages: this.state.messages.concat([
               {
                 id: newMessage.id,
+                type: newMessage.type,
                 username: newMessage.username,
                 content: newMessage.content
               }
@@ -48,11 +49,21 @@ class App extends Component {
           });
           break;
         case 'incomingNotification':
+          this.setState({
+            messages: this.state.messages.concat([
+              {
+                id: newMessage.id,
+                type: newMessage.type,
+                username: '',
+                content: newMessage.content
+              }
+            ])
+          });
           console.log('incoming notification', newMessage.content);
           break;
         case 'numberOfUsers':
           console.log('numberOfUsers', newMessage.numberOfUsers);
-          this.setState({numberOfUsers:newMessage.numberOfUsers})
+          this.setState({ numberOfUsers: newMessage.numberOfUsers });
           break;
         default:
           // show an error in the console if the message type is unknown
@@ -94,7 +105,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar numberOfUsers={this.state.numberOfUsers}/>
+        <NavBar numberOfUsers={this.state.numberOfUsers} />
         <MessageList messages={this.state.messages} />
         <ChatBar
           username={this.state.username}
