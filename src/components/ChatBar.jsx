@@ -6,7 +6,8 @@ class ChatBar extends Component {
     this.state = { username: this.props.username, content: '', error: '' };
     this.onMessageSubmit = this.onMessageSubmit.bind(this);
     this.onMessageChange = this.onMessageChange.bind(this);
-    this.onUserNameChange = this.onUserNameChange.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
+    this.onUsernameSubmit = this.onUsernameSubmit.bind(this);
   }
 
   // onMessageSubmit when the user presses enter on the submit field.
@@ -21,9 +22,20 @@ class ChatBar extends Component {
   onMessageChange(event) {
     this.setState({ content: event.target.value });
   }
+
   // need an on change event
-  onUserNameChange(event) {
+  onUsernameChange(event) {
     this.setState({ username: event.target.value });
+  }
+
+  
+  // need an on change event
+  onUsernameSubmit(event) {
+    if (event.key == 'Enter') {
+      this.props.onNewUsername(event.target.value);
+      this.setState({ username: event.target.value });
+    }
+    
   }
 
   // Main render
@@ -33,7 +45,8 @@ class ChatBar extends Component {
         <input
           className="chatbar-username"
           placeholder="Your Name (Optional)"
-          onChange={this.onUserNameChange}
+          onKeyPress={this.onUsernameSubmit}
+          onChange={this.onUsernameChange}
           value={this.state.username}
         />
         <input

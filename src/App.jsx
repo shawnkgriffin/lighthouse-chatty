@@ -8,11 +8,12 @@ class App extends Component {
     super();
     this.state = {
       connected: false,
-      currentUser: { name: '' },
+      username: '',
       messages: []
     };
 
     this.onNewMessage = this.onNewMessage.bind(this);
+    this.onNewUsername = this.onNewUsername.bind(this);
   }
 
   componentDidMount() {
@@ -24,13 +25,14 @@ class App extends Component {
     //incoming message
     this.WebSocket.onmessage = event => {
       console.log('received', event.data);
+      
       const newMessage = JSON.parse(event.data);
 
       // There are different types of messages. We need to route on them.
       // The socket event data is encoded as a JSON string.
       // This line turns it into an object
-      const data = JSON.parse(event.data);
-      switch (data.type) {
+      
+      switch (newMessage.type) {
         case 'incomingMessage':
           // Update the state of the app component.
           // Calling setState will trigger a call to render() in App and all child components.
@@ -45,16 +47,17 @@ class App extends Component {
           });
           break;
         case 'incomingNotification':
-          // handle incoming notification
+          console.log('incoming notification', newMessage.data);
           break;
         default:
           // show an error in the console if the message type is unknown
-          throw new Error('Unknown event type ' + data.type);
+          throw new Error('Unknown event type ' + newMessage.type);
       }
     };
   }
 
   // when we get a new message, send it to the server
+  // this will be called from the ChatBar component when a user presses the enter key.
   onNewMessage(username, content) {
     // Send the msg object as a JSON-formatted string.
     const newMessage = {
@@ -67,6 +70,21 @@ class App extends Component {
     this.WebSocket.send(jsonNewMessage);
   }
 
+  // when the user changes their name, notify everyone.
+  onNewUsername(newUsername) {
+    // Send the msg object as a JSON-formatted string.
+    const newMessage = {
+      type: 'postNotification',
+      content: `${this.state.username} has changed their name to ${newUsername}`
+    };
+    const jsonNewUserName = JSON.stringify(newMessage);
+    console.log('onNewUserName json', jsonNewUserName);
+    this.WebSocket.send(jsonNewUserName);
+
+    // set the new user's name.
+    this.setState({ username: newUsername });
+  }
+
   // Main render
   render() {
     return (
@@ -74,8 +92,9 @@ class App extends Component {
         <NavBar />
         <MessageList messages={this.state.messages} />
         <ChatBar
-          username={this.state.currentUser.name}
+          username={this.state.username}
           onNewMessage={this.onNewMessage}
+          onNewUsername={this.onNewUsername}
         />
       </div>
     );
