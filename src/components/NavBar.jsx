@@ -7,12 +7,16 @@ class NavBar extends Component {
     }
   }
   render() {
+    const numberOfUsers = this.props.numberOfUsers;
+    const loggedIn = (numberOfUsers === 1) 
+    ? `You are the only one logged in. Have fun chatting to yourself.`
+    : `${numberOfUsers} users logged in.`;
     return (
       <nav className="navbar">
         <a href="/" className="navbar-brand">
           Chatty
         </a>
-        <a className = "navbar-numberOfUsers">{this.props.numberOfUsers} users logged in. </a>
+        <a className = "navbar-numberOfUsers">{loggedIn}. </a>
       </nav>
     );
   } 
