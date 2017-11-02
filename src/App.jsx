@@ -3,6 +3,7 @@ import NavBar from './components/NavBar.jsx';
 import MessageList from './components/MessageList.jsx';
 import ChatBar from './components/ChatBar.jsx';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -106,7 +107,7 @@ class App extends Component {
     return (
       <div>
         <NavBar numberOfUsers={this.state.numberOfUsers} />
-        <aside> Users </aside>
+        
         <MessageList messages={this.state.messages} />
         <ChatBar
           username={this.state.username}
