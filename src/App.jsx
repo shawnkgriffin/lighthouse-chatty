@@ -44,7 +44,8 @@ class App extends Component {
                 id: newMessage.id,
                 type: newMessage.type,
                 username: newMessage.username,
-                content: newMessage.content
+                content: newMessage.content,
+                color: newMessage.color
               }
             ])
           });
