@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       connected: false,
+      numberOfUsers: 0,
       username: '',
       messages: []
     };
@@ -25,13 +26,13 @@ class App extends Component {
     //incoming message
     this.WebSocket.onmessage = event => {
       console.log('received', event.data);
-      
+
       const newMessage = JSON.parse(event.data);
 
       // There are different types of messages. We need to route on them.
       // The socket event data is encoded as a JSON string.
       // This line turns it into an object
-      
+
       switch (newMessage.type) {
         case 'incomingMessage':
           // Update the state of the app component.
@@ -47,7 +48,11 @@ class App extends Component {
           });
           break;
         case 'incomingNotification':
-          console.log('incoming notification', newMessage.data);
+          console.log('incoming notification', newMessage.content);
+          break;
+        case 'numberOfUsers':
+          console.log('numberOfUsers', newMessage.numberOfUsers);
+          this.setState({numberOfUsers:newMessage.numberOfUsers})
           break;
         default:
           // show an error in the console if the message type is unknown
@@ -89,7 +94,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar numberOfUsers={this.state.numberOfUsers}/>
         <MessageList messages={this.state.messages} />
         <ChatBar
           username={this.state.username}
