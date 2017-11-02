@@ -14,8 +14,8 @@ The functional requirements, and their status can be found [here](https://github
 
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the `npm install` command.
-3. You will need to run the Chatty Server, which can be found here. The chatty server will list on port 3001.
-4. Start the web server using the `npm run start` command. 
+3. You will need to run the Chatty Server, which can be found [here](https://github.com/shawnkgriffin/lighthouse-chatty-server). The chatty server will listen on port 3001. Follow the instructions in Chatty Server README to get it up and running. 
+4. Start the client using the `npm run start` command. 
 5. Go to <http://http://localhost:3000//> in your browser to run the client. 
 
 ## Dependencies
