@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { numberOfUsers : this.props.numberOfUsers
+    this.state = { 
     }
   }
   render() {
