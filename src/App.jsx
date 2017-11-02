@@ -91,7 +91,7 @@ class App extends Component {
     // Send the msg object as a JSON-formatted string.
     const newMessage = {
       type: 'postNotification',
-      content: `${this.state.username} has changed their name to ${newUsername}`
+      content: `${this.state.username ||'Anonymous'} has changed their name to ${newUsername}.`
     };
     const jsonNewUserName = JSON.stringify(newMessage);
     console.log('onNewUserName json', jsonNewUserName);
