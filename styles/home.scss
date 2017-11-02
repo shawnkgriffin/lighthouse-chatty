@@ -3,14 +3,14 @@
 
 body {
   background: white;
-  color: black;
+  color: white;
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: tomato;
+  background: black;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
@@ -39,6 +39,7 @@ body {
 }
 
 .message {
+  color:black;
   display: flex;
   padding: 5px;
 }
@@ -65,7 +66,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: black;
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
