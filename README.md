@@ -1,12 +1,13 @@
+![Chatty](https://github.com/shawnkgriffin/lighthouse-chatty/blob/master/docs/Titlebar.png)
 # Chatty Client
 
 Many of the web applications that we use today have real-time functionality where the user does not have to reload the page in order to see updates. Major examples of these include Slack, Twitter and Facebook.
 
 My app, Chatty will allow users to communicate with each other without having to register accounts. It will use React, a popular front-end library created and used heavily by Facebook as well as modern tools for Node including Webpack and Babel.
-The functional requirements, and their status can be found [here](https://github.com/shawnkgriffin/tweeter/blob/master/Functional%20Requirements.md). 
+The functional requirements, and their status can be found [here](https://github.com/shawnkgriffin/lighthouse-chatty/blob/master/docs/Functional%20Requirements.md). 
 
 ## Screen Shots
-![4 Users](https://www.dropbox.com/s/djzntvi24hf44lf/Screenshot%20.png "Sample Session.")
+![4 Users](https://github.com/shawnkgriffin/lighthouse-chatty/blob/master/docs/Screenshot.png "Sample Session.")
 
 
 ## Getting Started
