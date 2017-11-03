@@ -26,7 +26,6 @@ class App extends Component {
 
     //incoming message
     this.WebSocket.onmessage = event => {
-      console.log('received', event.data);
 
       const newMessage = JSON.parse(event.data);
 
@@ -61,10 +60,8 @@ class App extends Component {
               }
             ])
           });
-          console.log('incoming notification', newMessage.content);
           break;
         case 'numberOfUsers':
-          console.log('numberOfUsers', newMessage.numberOfUsers);
           this.setState({ numberOfUsers: newMessage.numberOfUsers });
           break;
         default:
@@ -84,7 +81,6 @@ class App extends Component {
       content: content
     };
     const jsonNewMessage = JSON.stringify(newMessage);
-    console.log('onNewMessage json', jsonNewMessage);
     this.WebSocket.send(jsonNewMessage);
   }
 
@@ -96,7 +92,6 @@ class App extends Component {
       content: `${this.state.username ||'Anonymous'} has changed their name to ${newUsername}.`
     };
     const jsonNewUserName = JSON.stringify(newMessage);
-    console.log('onNewUserName json', jsonNewUserName);
     this.WebSocket.send(jsonNewUserName);
 
     // set the new user's name.

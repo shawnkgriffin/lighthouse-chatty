@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-
+/* 
+ * Chatbar handles the chatbar on the bottom.
+ * Key functionality
+ * Name field. changing name and pressing enter sends a message to server.
+ * Content field. changing content and pressing enter sends a message to server.
+ * 
+ */
 class ChatBar extends Component {
   constructor(props) {
     super(props);
